@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Jogo de Clique nas Estrelas</title>
+  <style>
+    #game-board {
+      width: 350px;
+      height: 350px;
+      background-color: #99109e;
+      position: relative;
+      margin: 0 auto;
+      margin-top: 50px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(11, 77, 163, 0.3);
+      cursor: pointer;
+    }
+
+    .star {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      background-image: url('https://img1.picmix.com/output/stamp/normal/9/3/5/6/966539_ed112.gif');
+      background-size: cover;
+      transition: none 0.3s ease;
+    }
+
+    #score {
+      background: #eb4bdd;
+      text-align: center;
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    #timer {
+      background: #fa95fa;
+      text-align: center;
+      font-size: 24px;
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    var score = 0;
+    var timeLeft = 10;
+
+    function startGame() {
+      score = 0;
+      timeLeft = 10;
+      updateScore();
+      updateTime();
+
+      var stars = document.getElementsByClassName("star");
+      for (var i = 0; i < stars.length; i++) {
+        stars[i].addEventListener("click", hitStar);
+      }
+
+      var timerInterval = setInterval(updateTime, 1000);
+      setTimeout(function () {
+        clearInterval(timerInterval);
+        for (var i = 0; i < stars.length; i++) {
+          stars[i].removeEventListener("click", hitStar);
+        }
+        alert("Fim do jogo! Seu score final: " + score);
+      }, timeLeft * 1000);
+    }
+
+    function hitStar() {
+      this.style.opacity = "0";
+      score += 10;
+      updateScore();
+    }
+
+    function updateScore() {
+      var scoreElement = document.getElementById("score");
+      scoreElement.innerHTML = "Score: " + score;
+    }
+
+    function updateTime() {
+      var timerElement = document.getElementById("timer");
+      timerElement.innerHTML = "Time: " + timeLeft + "s";
+      timeLeft--;
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Jogo de Clique nas Estrelas</h1>
+  <div id="game-board">
+    <div class="star" style="top: 20px; left: 20px;"></div>
+    <div class="star" style="top: 20px; left: 120px;"></div>
+    <div class="star" style="top: 20px; left: 220px;"></div>
+    <div class="star" style="top: 120px; left: 20px;"></div>
+    <div class="star" style="top: 120px; left: 120px;"></div>
+    <div class="star" style="top: 120px; left: 220px;"></div>
+    <div class="star" style="top: 220px; left: 20px;"></div>
+    <div class="star" style="top: 220px; left: 120px;"></div>
+    <div class="star" style="top: 220px; left: 220px;"></div>
+  </div>
+  <button onclick="startGame()">Iniciar Jogo</button>
+  <div id="score">Score: 0</div>
+  <div id="timer">Time: 10s</div>
+</body>
+
+</html>

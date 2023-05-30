@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Calculadora de Gastos com Combustível</title>
+  <script>
+    function calcularGasto() {
+      var quilometragem = parseFloat(document.getElementById("quilometragem").value);
+      var valorCombustivel = parseFloat(document.getElementById("valor-combustivel").value);
+
+      var consumo = 8; // km por litro
+      var litrosConsumidos = quilometragem / consumo;
+      var gastoTotal = litrosConsumidos * valorCombustivel;
+
+      document.getElementById("resultado").innerHTML = "O gasto total com combustível é: R$ " + gastoTotal.toFixed(2);
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Calculadora de Gastos com Combustível</h1>
+
+  <label for="quilometragem">Quilometragem percorrida:</label>
+  <input type="number" id="quilometragem">
+
+  <label for="valor-combustivel">Valor do combustível (por litro):</label>
+  <input type="number" id="valor-combustivel">
+
+  <button onclick="calcularGasto()">Calcular Gasto</button>
+
+  <p id="resultado"></p>
+</body>
+
+</html>
